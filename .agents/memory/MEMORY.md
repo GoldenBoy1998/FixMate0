@@ -1,0 +1,1 @@
+- [FixMate product scope](fixmate-product-scope.md) — Keep the platform independent, Sudan-first, Arabic RTL, and free of paid integrations for the MVP.
