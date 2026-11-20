@@ -1,0 +1,12 @@
+{
+  "routes": [
+    { "path": "/", "title": "الرئيسية" },
+    { "path": "/services", "title": "الخدمات" },
+    { "path": "/request", "title": "طلب صيانة" },
+    { "path": "/technician-register", "title": "انضم كفني" },
+    { "path": "/login", "title": "تسجيل الدخول" },
+    { "path": "/dashboard/customer", "title": "لوحة العميل" },
+    { "path": "/dashboard/technician", "title": "لوحة الفني" },
+    { "path": "/dashboard/admin", "title": "لوحة الإدارة" }
+  ]
+}
