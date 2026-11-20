@@ -12,14 +12,14 @@ FixMate is an Arabic-first maintenance-services marketplace demo connecting cust
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 
-The current FixMate MVP does not use the API server or database.
+The frontend prototype is preserved, while the production foundation now includes a real PostgreSQL/Drizzle schema, Express authentication/session routes, and request APIs. Frontend screen-by-screen migration is still in progress.
 
 ## Stack
 
 - pnpm workspaces, React, TypeScript, Vite, Wouter, and Tailwind CSS
 - FixMate forms use React Hook Form and Zod validation.
 - FixMate demo state is stored in browser localStorage.
-- Existing shared scaffolds include an Express API, PostgreSQL/Drizzle, Zod, and Orval code generation; they are not part of the current FixMate flow.
+- The shared workspace now contains the active Express API, PostgreSQL/Drizzle schema, Zod validation, and OpenAPI contract.
 
 ## Where things live
 
@@ -30,7 +30,7 @@ The current FixMate MVP does not use the API server or database.
 
 ## Architecture decisions
 
-- Demo roles are simulated; there is no real sign-in or access control.
+- The legacy frontend demo roles remain simulated until the frontend is migrated to the backend; API access control is real and backend-enforced.
 - Customer requests, technician applications, and admin updates stay in the current browser.
 - The API and database are intentionally deferred for this first MVP.
 
