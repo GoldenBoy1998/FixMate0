@@ -12,6 +12,7 @@
 - Added customer registration and technician registration forms.
 - Added real request lifecycle actions for technicians and customers.
 - Added admin technician approval and category enable/disable controls.
+- Added an admin request queue with assignment controls for approved technicians.
 - Added site-wide Arabic/English switching with `html.lang` and `html.dir` updates.
 - Added the `/register` route to the frontend route manifest.
 - Added backend admin router registration.
