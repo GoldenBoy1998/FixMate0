@@ -9,3 +9,6 @@ const envSchema = z.object({
 });
 
 export const config = envSchema.parse(process.env);
+if (config.SESSION_COOKIE_SAME_SITE === "none" && !config.SESSION_COOKIE_SECURE) {
+  throw new Error("SESSION_COOKIE_SAME_SITE=none requires SESSION_COOKIE_SECURE=true");
+}
