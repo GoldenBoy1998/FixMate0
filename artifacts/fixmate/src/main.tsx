@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 
 import App from './App';
+import { AuthProvider } from './auth';
 import { ErrorBoundary } from '@/components/error-boundary';
 
 import './index.css';
@@ -12,6 +13,6 @@ createRoot(document.getElementById('root')!, {
   },
 }).render(
   <ErrorBoundary>
-    <App />
+    <AuthProvider><App /></AuthProvider>
   </ErrorBoundary>,
 );
