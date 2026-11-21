@@ -2,6 +2,7 @@ export type ApiUser = { id: string; displayName: string; email?: string | null; 
 export type ApiCategory = { id: string; slug: string; nameAr: string; nameEn: string; descriptionAr: string; descriptionEn: string; icon: string; sortOrder: number; isEnabled: boolean };
 export type ApiRequest = { id: string; referenceCode: string; customerId: string; categoryId: string; assignedTechnicianId?: string | null; title: string; description: string; state: string; city: string; address?: string | null; preferredDate?: string | null; status: string; createdAt: string; updatedAt: string };
 export type RequestHistory = { id: string; requestId: string; fromStatus?: string | null; toStatus: string; actorId?: string | null; note?: string | null; createdAt: string };
+export type ApiNotification = { id: string; userId: string; type: string; titleAr: string; bodyAr: string; referenceId?: string | null; readAt?: string | null; createdAt: string };
 export type RegisterInput = { displayName: string; email?: string; phone?: string; password: string; role: 'customer' | 'technician'; state?: string; city?: string; bio?: string; location?: string; yearsExperience?: number };
 export type ApiError = { error?: { code?: string; message?: string; details?: unknown } };
 
@@ -27,4 +28,7 @@ export const api = {
   approveTechnician: (id: string, approval: 'approved' | 'rejected' | 'suspended', notes?: string) => request(`/admin/technicians/${id}/approval`, { method: 'POST', body: JSON.stringify({ approval, notes }) }),
   adminCategories: () => request<{ categories: ApiCategory[] }>('/admin/categories'),
   toggleCategory: (id: string, enabled: boolean) => request(`/admin/categories/${id}/toggle`, { method: 'POST', body: JSON.stringify({ enabled }) }),
+  notifications: () => request<{ notifications: ApiNotification[] }>('/notifications'),
+  markNotificationRead: (id: string) => request<{ notification: ApiNotification }>(`/notifications/${id}/read`, { method: 'POST' }),
+  uploadAttachment: async (requestId: string, file: File) => { const form = new FormData(); form.append('file', file); const response = await fetch(`/api/requests/${requestId}/attachments`, { method: 'POST', credentials: 'include', body: form }); const body = await response.json(); if (!response.ok) throw new Error(body?.error?.message || 'تعذر رفع المرفق'); return body as { attachment: { id: string; originalName: string } }; },
 };

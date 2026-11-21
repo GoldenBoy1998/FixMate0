@@ -1,5 +1,6 @@
 import type { ErrorRequestHandler, RequestHandler } from "express";
 import { ZodError } from "zod";
+import multer from "multer";
 
 export class HttpError extends Error {
   constructor(public readonly status: number, message: string, public readonly code = "REQUEST_ERROR") {
@@ -12,6 +13,11 @@ export const asyncRoute = (handler: RequestHandler): RequestHandler => (req, res
 };
 
 export const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
+  if (error instanceof multer.MulterError) {
+    const message = error.code === "LIMIT_FILE_SIZE" ? "حجم الملف يتجاوز 5 ميجابايت" : "تعذر استقبال الملف";
+    res.status(400).json({ error: { code: "UPLOAD_ERROR", message } });
+    return;
+  }
   if (error instanceof ZodError) {
     res.status(400).json({ error: { code: "VALIDATION_ERROR", message: "بيانات الطلب غير صحيحة", details: error.flatten() } });
     return;
